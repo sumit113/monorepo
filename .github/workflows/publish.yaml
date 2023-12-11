@@ -27,7 +27,7 @@ jobs:
     - name: "Setup npm"
       run: |
         npm set @sumjit113:registry=https://npm.pkg.github.com/sumit113
-        npm set "//npm.pkg.github.com/:_authToken=${{ secrets.PUBLISH_PACKAGES }}"
+        npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
     - name: "Version and publish"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
