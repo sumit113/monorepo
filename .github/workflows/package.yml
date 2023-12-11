@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'packages/data-logic/**'
-      - 'packages/data-renderer/**'
+      - 'packages/data-logic'
+      - 'packages/data-renderer'
       # - 'package3/**'
 
 jobs:
