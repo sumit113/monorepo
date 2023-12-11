@@ -1,0 +1,43 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/data-logic/**'
+      - 'packages/data-renderer/**'
+      # - 'package3/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - packages/data-logic
+          - packages/data-renderer
+          # - package3
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+
+    - name: Publish package
+      run: |
+        cd ${{ matrix.package }}
+        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep ${{ matrix.package }}; then
+          npm publish
+        else
+          echo "No changes in ${{ matrix.package }}, skipping publish."
+        fi
+      env:
+        NPM_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
