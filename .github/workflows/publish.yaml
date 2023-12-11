@@ -26,8 +26,8 @@ jobs:
 
     - name: "Setup npm"
       run: |
-        npm set @xcanchal:registry=https://npm.pkg.github.com/xcanchal
-        npm set "//npm.pkg.github.com/:_authToken=${{ secrets._authToken }}"
+        npm set @sumjit113:registry=https://npm.pkg.github.com/sumit113
+        npm set "//npm.pkg.github.com/:_authToken=${{ secrets.PUBLISH_PACKAGES }}"
     - name: "Version and publish"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
